@@ -21,7 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  yaml_manager:
+  bsfys:
     git:
       url: https://github.com/bspfp/bsfys.git
       ref: main
