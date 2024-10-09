@@ -16,7 +16,7 @@ BS가 만든 Flutter 프로젝트를 위한 YAML 저장소
 
 (Adds the following dependencies to the Flutter project's `pubspec.yaml` file)
 
-```
+```yaml
 dependencies:
   flutter:
     sdk: flutter
