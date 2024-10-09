@@ -34,3 +34,37 @@ dependencies:
 ```bash
 $ flutter pub get
 ```
+
+## 예제 (Example)
+
+```dart
+  test('load-get-set-del-save-load', () async {
+    // 저장소를 생성 (Create a storage)
+    final ys = YamlStorage();
+
+    // 파일에서 읽기 (Load from file)
+    await ys.load('test');
+
+    // 값 가져오기 (Get a value)
+    expect(ys['key1'], null);
+
+    // 값 설정하기 (Set a value)
+    ys['key1'] = 'value1';
+    expect(ys['key1'], 'value1');
+    ys['key1'] = 'value2';
+    expect(ys['key1'], 'value2');
+    ys['key2'] = 1234;
+    expect(ys['key2'], 1234);
+
+    // 값 삭제
+    ys.remove('key2');
+    expect(ys['key2'], null);
+
+    // 파일에 저장 (Save to file)
+    await ys.save();
+
+    final ys2 = YamlStorage();
+    await ys2.load('test');
+    expect(ys2['key1'], 'value2');
+  });
+```
