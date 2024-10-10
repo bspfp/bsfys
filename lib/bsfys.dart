@@ -34,11 +34,20 @@ class YamlStorage {
     _store = kIsWeb ? YamlstoreWeb(filename) : YamlstoreDefault(filename);
     var yaml = await _store.loadFile();
     final yamlMap = loadYaml(yaml);
-    _dataMap = yamlMap.map<String, dynamic>((key, value) => MapEntry(key.toString(), value));
+    _dataMap = _convertMapValue(yamlMap);
   }
 
   Future<void> save({String? newFilename}) async {
     String yamlString = json2yaml(_dataMap);
     await _store.saveFile(yamlString: yamlString, newFilename: newFilename);
+  }
+
+  dynamic _convertMapValue(dynamic value) {
+    if (value is YamlMap) {
+      return value.map<String, dynamic>((key, value) {
+        return MapEntry(key.toString(), _convertMapValue(value));
+      });
+    }
+    return value;
   }
 }
