@@ -17,9 +17,13 @@ class YamlstoreWeb extends YamlStore {
   }
 
   @override
-  Future<void> saveFile({required String yamlString, String? newFilename}) async {
-    newFilename ??= filename;
+  Future<void> saveFile({required String yamlString, String? backupFilename}) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(newFilename, yamlString);
+    await prefs.setString(backupFilename ?? filename, yamlString);
+  }
+
+  static Future<void> clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }

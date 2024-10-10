@@ -37,9 +37,14 @@ class YamlStorage {
     _dataMap = _convertMapValue(yamlMap);
   }
 
-  Future<void> save({String? newFilename}) async {
+  Future<void> save({String? backupFilename}) async {
     String yamlString = json2yaml(_dataMap);
-    await _store.saveFile(yamlString: yamlString, newFilename: newFilename);
+    await _store.saveFile(yamlString: yamlString, backupFilename: backupFilename);
+  }
+
+  static Future<void> clearAll() async {
+    if (!kIsWeb) throw UnsupportedError('clearAll() is not supported on this platform');
+    await YamlstoreWeb.clearAll();
   }
 
   dynamic _convertMapValue(dynamic value) {

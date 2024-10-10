@@ -8,8 +8,7 @@ class YamlstoreDefault extends YamlStore {
 
   @override
   Future<String> loadFile() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final file = File('${dir.path}/$filename.yaml');
+    final file = await _makeFile(filename);
     if (await file.exists()) {
       final str = await file.readAsString();
       if (str.isNotEmpty) {
@@ -23,13 +22,16 @@ class YamlstoreDefault extends YamlStore {
   }
 
   @override
-  Future<void> saveFile({required String yamlString, String? newFilename}) async {
-    newFilename ??= filename;
-    final dir = await getApplicationDocumentsDirectory();
-    final file = File('${dir.path}/$newFilename.yaml');
+  Future<void> saveFile({required String yamlString, String? backupFilename}) async {
+    final file = await _makeFile(backupFilename ?? filename);
     if (!await file.exists()) {
       await file.create(recursive: true);
     }
     await file.writeAsString(yamlString);
+  }
+
+  static Future<File> _makeFile(String filename) async {
+    final dir = await getApplicationDocumentsDirectory();
+    return File('${dir.path}/$filename.yaml');
   }
 }

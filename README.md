@@ -35,6 +35,47 @@ dependencies:
 $ flutter pub get
 ```
 
+## 기능 설명 (Description)
+
+```dart
+class YamlStorage {
+  // key에 해당하는 값을 반환합니다.
+  // Returns the value corresponding to the key.
+  dynamic operator [](String key);
+
+  // key에 해당하는 값을 설정합니다.
+  // Sets the value corresponding to the key.
+  void operator []=(String key, dynamic value);
+
+  // key에 해당하는 값을 삭제합니다.
+  // Deletes the value corresponding to the key.
+  void remove(String key);
+
+  // 모든 key-value에 대해 f()함수를 실행합니다.
+  // Call the f function for all key-value pairs.
+  void forEach(Function(String key, dynamic value) f);
+
+  // f()의 결과가 true가 반환될 때까지 검색합니다.
+  // 찾지 못하면 false를 반환합니다.
+  // Find until the result of f() returns true.
+  // If not found, false is returned.
+  bool findIf(bool Function(String key, dynamic value) f);
+
+  // 파일에서 읽기 (Load from file)
+  Future<void> load(String filename) async;
+
+  // 파일에 저장합니다.
+  // backupFilename이 지정되면 백업 파일에 저장합니다.
+  // Saves to the file.
+  // If backupFilename is specified, save to the backup file.
+  Future<void> save({String? backupFilename}) async;
+
+  // 모든 데이터를 삭제합니다. 이 기능은 Web 플랫폼에서만 작동합니다.
+  // Clears all data. This function only works on the Web platform.
+  static Future<void> clearAll() async;
+}
+```
+
 ## 예제 (Example)
 
 ```dart

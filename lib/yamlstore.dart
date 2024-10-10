@@ -7,7 +7,7 @@ class YamlStore {
     throw UnimplementedError();
   }
 
-  Future<void> saveFile({required String yamlString, String? newFilename}) async {
+  Future<void> saveFile({required String yamlString, String? backupFilename}) async {
     throw UnimplementedError();
   }
 }
