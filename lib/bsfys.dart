@@ -14,21 +14,9 @@ class YamlStorage {
 
   dynamic operator [](String key) => _dataMap[key];
   void operator []=(String key, dynamic value) => _dataMap[key] = value;
+  Map<String, dynamic> get doc => _dataMap;
 
   void remove(String key) => _dataMap.remove(key);
-
-  void forEach(Function(String key, dynamic value) f) {
-    _dataMap.forEach((key, value) => f(key, value));
-  }
-
-  bool findIf(bool Function(String key, dynamic value) f) {
-    for (var v in _dataMap.entries) {
-      if (f(v.key, v.value)) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   Future<void> load(String filename) async {
     _store = kIsWeb ? YamlstoreWeb(filename) : YamlstoreDefault(filename);
