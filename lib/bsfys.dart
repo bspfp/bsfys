@@ -19,13 +19,14 @@ class YamlStorage {
   void remove(String key) => _dataMap.remove(key);
 
   Future<void> load(String filename) async {
-    _store = kIsWeb ? YamlstoreWeb(filename) : YamlstoreDefault(filename);
+    _store = _openStore(filename);
     var yaml = await _store.loadFile();
     final yamlMap = loadYaml(yaml);
     _dataMap = _convertMapValue(yamlMap);
   }
 
   Future<void> save({String? backupFilename}) async {
+    var store = backupFilename != null ? _openStore(backupFilename) : _store;
     String yamlString = json2yaml(_dataMap);
     await _store.saveFile(yamlString: yamlString, backupFilename: backupFilename);
   }
@@ -34,6 +35,8 @@ class YamlStorage {
     if (!kIsWeb) throw UnsupportedError('clearAll() is not supported on this platform');
     await YamlstoreWeb.clearAll();
   }
+
+  YamlStore _openStore(String filename) => kIsWeb ? YamlstoreWeb(filename) : YamlstoreDefault(filename);
 
   dynamic _convertMapValue(dynamic value) {
     if (value is YamlMap) {
