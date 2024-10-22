@@ -9,7 +9,7 @@ import 'yamlstore_default.dart';
 import 'yamlstore_web.dart';
 
 class YamlStorage {
-  late Map<String, dynamic> _dataMap;
+  Map<String, dynamic> _dataMap = {};
   late YamlStore _store;
 
   dynamic operator [](String key) => _dataMap[key];
