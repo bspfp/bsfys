@@ -28,7 +28,7 @@ class YamlStorage {
   Future<void> save({String? backupFilename}) async {
     var store = backupFilename != null ? _openStore(backupFilename) : _store;
     String yamlString = json2yaml(_dataMap);
-    await _store.saveFile(yamlString: yamlString, backupFilename: backupFilename);
+    await store.saveFile(yamlString: yamlString, backupFilename: backupFilename);
   }
 
   static Future<void> clearAll() async {
