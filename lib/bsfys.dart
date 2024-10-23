@@ -10,6 +10,7 @@ import 'yamlstore_default.dart';
 import 'yamlstore_web.dart';
 
 const _encryptKey = 'T04pIB/8kdQf43avzLLz607wfSfWDKZPjrd0hS1FAyU=';
+const _encryptIV = 'B6zH1TrNZbxsw7PTaQ6nVg==';
 const _encryptPrefix = 'encrypted';
 
 class YamlStorage {
@@ -28,7 +29,7 @@ class YamlStorage {
     if (yaml.startsWith(_encryptPrefix)) {
       final encrypted = yaml.substring(_encryptPrefix.length);
       final key = Key.fromBase64(_encryptKey);
-      final iv = IV.fromLength(16);
+      final iv = IV.fromBase64(_encryptIV);
       final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
       final decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
       yaml = decrypted;
@@ -42,7 +43,7 @@ class YamlStorage {
     String yamlString = json2yaml(_dataMap);
     if (encrypt) {
       final key = Key.fromBase64(_encryptKey);
-      final iv = IV.fromLength(16);
+      final iv = IV.fromBase64(_encryptIV);
       final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
       final encrypted = encrypter.encrypt(yamlString, iv: iv);
       yamlString = '$_encryptPrefix${encrypted.base64}';
