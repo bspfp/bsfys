@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  encrypt: ^5.0.3
   flutter:
     sdk: flutter
   json2yaml: ^3.0.1
