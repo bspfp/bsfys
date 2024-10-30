@@ -2,8 +2,8 @@ library bsfys;
 
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:json2yaml/json2yaml.dart';
 import 'package:yaml/yaml.dart';
+import 'package:yaml_writer/yaml_writer.dart';
 
 import 'yamlstore.dart';
 import 'yamlstore_default.dart';
@@ -40,7 +40,7 @@ class YamlStorage {
 
   Future<void> save({String? backupFilename, bool encrypt = false}) async {
     var store = backupFilename != null ? _openStore(backupFilename) : _store;
-    String yamlString = json2yaml(_dataMap);
+    String yamlString = YamlWriter().write(_dataMap);
     if (encrypt) {
       final key = Key.fromBase64(_encryptKey);
       final iv = IV.fromBase64(_encryptIV);
