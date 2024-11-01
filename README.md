@@ -2,18 +2,16 @@
 
 (BS) (F)lutter (Y)AML (S)torage
 
-BS가 만든 Flutter 프로젝트를 위한 YAML 저장소
-
-(A simple YAML storage for Flutter projects created by BS.)
-
+BS가 만든 Flutter 프로젝트를 위한 YAML 저장소\
 간단한 앱을 작성할 때 DB 대용으로 사용할 용도로 만들었습니다.
 
-(The purpose of using this as a DB when writing a simple app.)
+A simple YAML storage for Flutter projects created by BS.\
+The purpose of using this as a DB when writing a simple app.
+
 
 ## 사용법 (Usage)
 
-아래 내용을 `pubspec.yaml` 파일에 추가하세요.
-
+아래 내용을 `pubspec.yaml` 파일에 추가하세요.\
 (Adds the following dependencies to the Flutter project's `pubspec.yaml` file)
 
 ```yaml
@@ -27,13 +25,20 @@ dependencies:
       ref: main
 ```
 
-패키지를 가져오기 위해 아래 명령어를 실행하세요.
-
+패키지를 가져오기 위해 아래 명령어를 실행하세요.\
 (Run the following command to import the package)
 
 ```bash
 $ flutter pub get
 ```
+
+## 주의 (Caution)
+
+Windows에서는 App 전용 공간이 아니라 %USERPROFILE%\Documents 폴더에 저장됩니다.\
+따라서, 파일명앞에 폴더 구분을 넣지 않으면 다른 프로그램과 충돌이 발생할 수 있습니다.
+
+On Windows, it is stored in the %USERPROFILE%\Documents folder, not the App-specific space.\
+Therefore, if you do not put a folder separator in front of the file name, there may be a conflict with other programs.
 
 ## 기능 설명 (Description)
 
